@@ -58,7 +58,8 @@ console.log(obj.fn());
 // #3-1 不同陣列合併
 const groupA = ['小明', '杰倫', '阿姨'];
 const groupB = ['老媽', '老爸'];
-
+// const groupC = groupA.concat(groupB);
+// const groupC = [...groupA,...groupB];
 
 // #3-2 物件擴展
 const methods = {
@@ -69,7 +70,17 @@ const methods = {
     console.log(1);
   },
 }
-
+// const newMethod = methods;
+// newMethod.fn3 = function() {
+//   console.log(3);
+// }
+const newMethod = {
+  ...methods,
+  fn3() {
+    console.log(3);
+  }
+};
+newMethod.fn3();
 
 // #3-3 轉成純陣列
 // 補充說明：NodeList 或 HTMLCollection 或 Arguments 是「類陣列」的物件，可以運用本章節的展開技巧轉換為純陣列。
@@ -79,6 +90,11 @@ const methods = {
 const doms = document.querySelectorAll('li');
 console.log(doms); // 請轉為純陣列
 
+const newDoms = [...doms];
+console.log(newDoms);
+newDoms.map((e) =>{
+  console.log(e);
+})
 
 
 // #4 預設值
