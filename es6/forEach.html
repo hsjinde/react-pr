@@ -32,16 +32,50 @@ const people = [
 // https://www.youtube.com/watch?v=_vFuDQ_6Xt8
 
 // #2. 操作所有陣列內的值（同一個陣列）
-
+// people.forEach((item, key) =>{
+//   item.newPrice = item.price *0.8;
+// })
+// console.log(people);
 
 // #3. 重新建立新的陣列
-
+// const order = people.map((item) => {
+//   return {
+//     price: item.price *0.8,
+//     title: item.like
+//   }
+// })
+// const order = people.map((item) => ({
+//     price: item.price *0.8,
+//     title: item.like
+// }));
+// console.log(order);
 
 // #4 map 使用注意事項
-
+// const order = people.map((item) => {
+//   if(item.price > 60) {
+//     return {
+//     price: item.price *0.8,
+//     title: item.like
+//     }
+//   }
+// });
+// console.log(order);
 // 當直接回傳時，會出現 undefined 的內容
+//判斷使用，回傳的結果會與原始的陣列一樣
+// const filterOrder = people.filter((item) => item.price > 60);
+// const order = filterOrder.map((item) => ({
+//     price: item.price *0.8,
+//     title: item.like
+// }));
+// console.log(order);
 
-
+//縮寫 filter and map
+const filterOrder = people.filter((item) => item.price > 60)
+.map((item, i) =>({
+  price: item.price *0.8,
+  title: item.like
+}));
+console.log(filterOrder);
 // 解法
 
 
@@ -71,7 +105,11 @@ const App = ()=> {
   ];
   return <div>
     <ul>
-      
+      {
+        people.map((item, i) => {
+          return <li key = {i}>{item.name}喜歡吃{item.like}</li>
+        })
+      }
     </ul>
   </div>
 }
