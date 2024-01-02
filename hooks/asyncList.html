@@ -22,6 +22,7 @@ const SearchBox = ({onSearchHandler, filterString}) => {
 }
 const App = () => {
   const [filterString, setFilterString] = useState('animal');
+  const [jasonData, setJasonData] = useState([]);
   const onSearchHandler = (e) => {
     setFilterString(e.target.value);
   }
@@ -31,6 +32,7 @@ const App = () => {
       try {
         const result = await axios.get(`${api}?client_id=${accessKey}&query=${filterString}`);
         console.log(result);
+        setJasonData(result.data.results);
       } catch (error) {
         console.log(error);
       }
@@ -38,6 +40,7 @@ const App = () => {
   }, []);
 
   return (<div>
+    {JSON.stringify(jasonData)}
     <SearchBox onSearchHandler={onSearchHandler} filterString={filterString} />
   </div>)
 }
