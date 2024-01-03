@@ -7,24 +7,45 @@
 <script type="text/babel">
 const { useState } = React
 const App = () => {
+  const [inputState, setInputState] = useState('casper')
+
+  // #Select
+  const optionList = ['台北','台中','高雄']
+  const [selectState, setSelectState] = useState([]);
 
   return (<div>
   {/* #1 input */}
-  <label htmlFor="username">使用者名稱 </label>
-  <input id="username" type="text"/>
+  <label htmlFor="username">使用者名稱 {inputState}</label>
+  <input id="username" type="text" value={inputState} onChange={e => setInputState(e.target.value)} />
+  <br />
 
-  {/* #2 select 選擇、預設值 */}
-  <select name="" id="" >
-    <option value="" disabled>-- 請選擇地區 --</option>
-  </select>
+
 
   {/* #3 multiSelect */}
-  <select name="" id="">
-
+  <select name="" id="" multiple={true} onChange={e => {
+    console.dir(e);
+  }}>
+    <option value="" disabled>-- 請選擇地區 --</option>
+    {
+      optionList.map((location) => {
+        return <option value={location} key={location}>{ location }</option>
+      })
+    }
   </select>
+
+  {/* #2 select 選擇、預設值 */}
+  {/*
+  <select name="" id="" value={selectState} onChange={e => setSelectState(e.target.value)}>
+    <option value="" disabled>-- 請選擇地區 --</option>
+    {
+      optionList.map((location) => {
+        return <option value={location} key={location}>{ location }</option>
+      })
+    }
+  </select>
+*/}
   </div>)
 }
-
 ReactDOM.createRoot(document.querySelector('#root'))
   .render(<App/>)
 </script>
