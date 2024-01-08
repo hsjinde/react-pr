@@ -12,6 +12,12 @@ const App = () => {
   // #Select
   const optionList = ['台北','台中','高雄']
   const [selectState, setSelectState] = useState([]);
+  const selectHandler = e => {
+    console.dir(e);
+    // console.log(e.target.selectedOptions[0].value);
+    // console.log([...e.target.selectedOptions].map((option) =>option.value));
+    setSelectState([...e.target.selectedOptions].map((option) =>option.value))
+  }
 
   return (<div>
   {/* #1 input */}
@@ -22,9 +28,8 @@ const App = () => {
 
 
   {/* #3 multiSelect */}
-  <select name="" id="" multiple={true} onChange={e => {
-    console.dir(e);
-  }}>
+  {selectState}
+  <select name="" id="" multiple={true} value={selectState} onChange={selectHandler}>
     <option value="" disabled>-- 請選擇地區 --</option>
     {
       optionList.map((location) => {
